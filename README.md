@@ -8,3 +8,5 @@ Integration between Salesforce and Twilio to initiate  Conversation when Campaig
    * Twilio Conversation ID
    * Twilio API Log
 4. Test functionality by creating a Campaign
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/XU3RpzczP6Q/0.jpg)](http://www.youtube.com/watch?v=XU3RpzczP6Q "Salesforce Twilio Integration - Initiate Conversation")
