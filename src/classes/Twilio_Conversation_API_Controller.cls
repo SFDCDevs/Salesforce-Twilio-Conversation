@@ -1,3 +1,13 @@
+/*****************************************************
+ * Name : Twilio_Conversation_API_Controller
+ * Developer: Vinay Vernekar
+ * Reference: https://www.fiverr.com/kingofwebhost/do-standard-or-custom-development-in-salesforce
+ * Website: https://sfdcdevelopers.com
+ * Email: support@sfdcdevelopers.com
+ * Purpose: Controller to send conversation initiative in Twilio
+ * Date: 5 March 2020
+ * Last Modified Date: 5 March 2020
+*******************************************************/
 public class Twilio_Conversation_API_Controller {
     @InvocableMethod
     public static void CreateConversation(List<id> CampaignIDs){
@@ -7,13 +17,18 @@ public class Twilio_Conversation_API_Controller {
     @future(callout=true)
     public static void CreateConversationCallout(List<id> CampaignIDs){
         List<Campaign> Campaigns = [select Id, Name from Campaign where id in: CampaignIDs];
-        String Endpoint = 'https://conversations.twilio.com/v1/Conversations';
-        String ACCOUNT_SID = Label.Twilio_Account_SID;
-        String AUTH_TOKEN = Label.Twilio_Auth_Token;
-        Map<string, string> HeaderMap = new Map<String, String>{'Content-Type' => 'application/json','Authorization' => 'Basic '+EncodingUtil.Base64Encode(Blob.valueOf(ACCOUNT_SID+':'+AUTH_TOKEN))};
         for(Campaign Cmp : Campaigns){
             String JsonBody = '{"friendlyName" : "'+Cmp.Name+'"}';
-            HTTPResponse Resp = Callout_Utility.doCallout(Endpoint, 'POST', HeaderMap, JsonBody, 12000 );
+            
+            //construct Http request
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint('callout:Twilio_Conversation');
+            req.setMethod('POST');
+            req.setBody(JsonBody);
+            Http http = new Http();
+            HTTPResponse Resp = http.send(req);
+
+            //validate response
             if(Resp.getStatusCode() == 201){
                 Object RespObj = (Object)JSON.deserializeUntyped(Resp.getBody());
                 Map<String, Object> RespObjMap = (Map<String, Object>)RespObj;
