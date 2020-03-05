@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Twilio_Account_SID</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twilio Account SID</shortDescription>
+        <value>CHANGE_WITH_ACCOUNT_SID</value>
+    </labels>
+    <labels>
+        <fullName>Twilio_Auth_Token</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Twilio Auth Token</shortDescription>
+        <value>CHANGE_WITH_AUTH_TOKEN</value>
+    </labels>
+</CustomLabels>
